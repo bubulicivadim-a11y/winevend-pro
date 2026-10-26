@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WineVend Pro v2.0 — Documentație Completă</title>
+    <meta name="description" content="WineVend Pro v2.0 — Mașină de vending vin vrac. Vizualizare 3D, specificații tehnice și desene de producție.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0c16;
+            --bg2: #0d0f1a;
+            --card: rgba(25, 28, 45, 0.85);
+            --border: rgba(255,255,255,0.06);
+            --border-accent: rgba(201,168,76,0.3);
+            --text: #e8e8f0;
+            --muted: #8a87a0;
+            --dim: #5a5775;
+            --wine: #c5737a;
+            --gold: #c9a84c;
+            --green: #2ecc71;
+            --blue: #3498db;
+        }
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', -apple-system, sans-serif;
+            line-height: 1.7;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            position: fixed; top:0; left:0; right:0; z-index:100;
+            background: rgba(10,12,22,0.92);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 32px; height: 64px;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .nav-brand {
+            display: flex; align-items: center; gap: 10px;
+            text-decoration: none;
+        }
+        .nav-brand-icon { font-size: 1.6rem; }
+        .nav-brand-text {
+            font-size: 1.15rem; font-weight: 700;
+            background: linear-gradient(135deg, var(--wine), var(--gold));
+            -webkit-background-clip: text; background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .nav-links {
+            display: flex; gap: 6px; list-style: none;
+        }
+        .nav-links a {
+            color: var(--muted); text-decoration: none;
+            font-size: 0.85rem; font-weight: 500;
+            padding: 8px 16px; border-radius: 8px;
+            transition: all 0.2s;
+        }
+        .nav-links a:hover { color: var(--gold); background: rgba(201,168,76,0.08); }
+        .nav-links a.active { color: var(--gold); background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.2); }
+        .hamburger {
+            display: none; flex-direction: column; gap: 5px;
+            background: none; border: none; cursor: pointer; padding: 6px;
+        }
+        .hamburger span {
+            display: block; width: 22px; height: 2px;
+            background: var(--text); border-radius: 2px; transition: 0.3s;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            text-align: center;
+            padding: 120px 32px 80px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute; inset: 0;
+            background:
+                radial-gradient(ellipse 600px 400px at 30% 40%, rgba(197,115,122,0.08) 0%, transparent 70%),
+                radial-gradient(ellipse 500px 350px at 70% 60%, rgba(201,168,76,0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(201,168,76,0.08);
+            border: 1px solid rgba(201,168,76,0.2);
+            border-radius: 24px; padding: 6px 18px;
+            font-size: 0.78rem; color: var(--gold);
+            margin-bottom: 28px; font-weight: 500;
+        }
+        .hero-badge .dot {
+            width: 6px; height: 6px; border-radius: 50%;
+            background: var(--green);
+            animation: pulse 2s ease infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800; line-height: 1.15;
+            margin-bottom: 20px;
+            max-width: 800px;
+        }
+        .hero h1 .gradient {
+            background: linear-gradient(135deg, var(--wine) 0%, var(--gold) 100%);
+            -webkit-background-clip: text; background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero .subtitle {
+            color: var(--muted); font-size: 1.05rem;
+            max-width: 620px; margin: 0 auto 48px;
+            line-height: 1.8;
+        }
+        .hero-actions {
+            display: flex; gap: 16px; flex-wrap: wrap;
+            justify-content: center;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--wine), var(--gold));
+            color: #fff; border: none; padding: 14px 32px;
+            border-radius: 12px; font-size: 0.95rem; font-weight: 600;
+            cursor: pointer; font-family: inherit;
+            text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+            transition: 0.3s;
+            box-shadow: 0 4px 20px rgba(197,115,122,0.25);
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 32px rgba(197,115,122,0.35);
+        }
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--border-accent);
+            color: var(--gold); padding: 14px 32px;
+            border-radius: 12px; font-size: 0.95rem; font-weight: 600;
+            cursor: pointer; font-family: inherit;
+            text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+            transition: 0.3s;
+        }
+        .btn-secondary:hover {
+            background: rgba(201,168,76,0.08);
+            transform: translateY(-3px);
+        }
+
+        /* ===== STATS BAR ===== */
+        .stats-bar {
+            display: flex; gap: 48px; justify-content: center;
+            padding: 32px; margin-top: 60px;
+            flex-wrap: wrap;
+        }
+        .stat-item { text-align: center; }
+        .stat-value {
+            font-size: 1.8rem; font-weight: 800;
+            font-family: 'JetBrains Mono', monospace;
+            background: linear-gradient(135deg, var(--wine), var(--gold));
+            -webkit-background-clip: text; background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .stat-label { font-size: 0.78rem; color: var(--muted); margin-top: 4px; }
+
+        /* ===== SECTIONS ===== */
+        .section {
+            max-width: 1200px; margin: 0 auto;
+            padding: 100px 32px;
+        }
+        .section-header {
+            text-align: center; margin-bottom: 64px;
+        }
+        .section-header h2 {
+            font-size: 2.4rem; font-weight: 800; margin-bottom: 12px;
+        }
+        .section-header p { color: var(--muted); max-width: 550px; margin: 0 auto; }
+        .divider {
+            width: 60px; height: 3px; margin: 20px auto;
+            background: linear-gradient(135deg, var(--wine), var(--gold));
+            border-radius: 3px;
+        }
+
+        /* ===== PAGE CARDS ===== */
+        .pages-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+        .page-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            text-decoration: none; color: inherit;
+            display: flex; flex-direction: column;
+        }
+        .page-card:hover {
+            border-color: var(--border-accent);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(201,168,76,0.1);
+        }
+        .page-card-visual {
+            height: 220px;
+            display: flex; align-items: center; justify-content: center;
+            position: relative; overflow: hidden;
+        }
+        .page-card-visual .card-icon {
+            font-size: 4rem;
+            position: relative; z-index: 2;
+        }
+        .page-card-visual::after {
+            content: ''; position: absolute; inset: 0;
+            opacity: 0.15;
+        }
+        /* FIX v2.1: legat anterior de nth-child (ordinea din DOM) — orice
+           reordonare/adăugare de card rupea silențios culorile. Acum legat
+           de un atribut explicit data-card, independent de poziție. */
+        .page-card[data-card="3d"] .page-card-visual {
+            background: linear-gradient(135deg, rgba(52,152,219,0.15), rgba(201,168,76,0.1));
+        }
+        .page-card[data-card="3d"] .page-card-visual::after {
+            background: radial-gradient(circle at 50% 50%, rgba(52,152,219,0.2), transparent 70%);
+        }
+        .page-card[data-card="specs"] .page-card-visual {
+            background: linear-gradient(135deg, rgba(197,115,122,0.15), rgba(201,168,76,0.1));
+        }
+        .page-card[data-card="specs"] .page-card-visual::after {
+            background: radial-gradient(circle at 50% 50%, rgba(197,115,122,0.2), transparent 70%);
+        }
+        .page-card[data-card="production"] .page-card-visual {
+            background: linear-gradient(135deg, rgba(46,204,113,0.15), rgba(201,168,76,0.1));
+        }
+        .page-card[data-card="production"] .page-card-visual::after {
+            background: radial-gradient(circle at 50% 50%, rgba(46,204,113,0.2), transparent 70%);
+        }
+        .page-card-body { padding: 28px; flex: 1; display: flex; flex-direction: column; }
+        .page-card-body .card-tag {
+            font-size: 0.7rem; font-weight: 600; text-transform: uppercase;
+            letter-spacing: 1px; margin-bottom: 10px;
+        }
+        .page-card[data-card="3d"] .card-tag { color: var(--blue); }
+        .page-card[data-card="specs"] .card-tag { color: var(--wine); }
+        .page-card[data-card="production"] .card-tag { color: var(--green); }
+
+        .page-card-body h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 10px; }
+        .page-card-body p { color: var(--muted); font-size: 0.88rem; line-height: 1.7; flex: 1; }
+        .page-card-body .card-features {
+            list-style: none; margin-top: 18px; padding-top: 18px;
+            border-top: 1px solid var(--border);
+        }
+        .page-card-body .card-features li {
+            font-size: 0.78rem; color: var(--muted);
+            padding: 3px 0; display: flex; align-items: center; gap: 8px;
+        }
+        .page-card-body .card-features li::before {
+            content: '✓'; color: var(--gold); font-weight: 700; font-size: 0.7rem;
+        }
+        .page-card-footer {
+            padding: 18px 28px;
+            border-top: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .page-card-footer .open-label {
+            font-size: 0.82rem; font-weight: 600; color: var(--gold);
+            display: flex; align-items: center; gap: 6px;
+        }
+        .page-card-footer .arrow {
+            transition: 0.3s; display: inline-block;
+        }
+        .page-card:hover .arrow { transform: translateX(4px); }
+
+        /* ===== KPI GRID ===== */
+        .kpi-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            gap: 20px; margin-top: 48px;
+        }
+        .kpi-card {
+            background: var(--card); border: 1px solid var(--border);
+            border-radius: 16px; padding: 24px 20px;
+            text-align: center; transition: 0.3s;
+        }
+        .kpi-card:hover {
+            border-color: var(--border-accent);
+            transform: translateY(-4px);
+        }
+        .kpi-icon { font-size: 1.6rem; margin-bottom: 10px; }
+        .kpi-value {
+            font-size: 1.2rem; font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--gold);
+        }
+        .kpi-label { font-size: 0.75rem; color: var(--muted); margin-top: 4px; }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            text-align: center; padding: 40px 32px;
+            border-top: 1px solid var(--border);
+            color: var(--dim); font-size: 0.8rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            .pages-grid { grid-template-columns: 1fr; }
+            .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+            .stats-bar { gap: 32px; }
+        }
+        @media (max-width: 768px) {
+            .hamburger { display: flex; }
+            .nav-links {
+                position: fixed; top: 64px; left: 0; right: 0;
+                background: rgba(10,12,22,0.95);
+                backdrop-filter: blur(20px);
+                flex-direction: column; padding: 16px 24px;
+                border-bottom: 1px solid var(--border);
+                transform: translateY(-120%); transition: transform 0.3s;
+                z-index: 99;
+            }
+            .nav-links.open { transform: translateY(0); }
+            .nav-links a { padding: 14px 16px; font-size: 1rem; border-radius: 10px; }
+            .hero { padding: 100px 20px 60px; }
+            .hero h1 { font-size: 2rem; }
+            .section { padding: 60px 20px; }
+            .kpi-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <a class="nav-brand" href="./index.html">
+            <span class="nav-brand-icon">🍷</span>
+            <span class="nav-brand-text">WineVend Pro</span>
+        </a>
+        <div class="nav-links" id="navLinks">
+            <a href="./index.html" class="active">Acasă</a>
+            <a href="./vizualizare.html">Vizualizare 3D</a>
+            <a href="./specificatie.html">Specificații</a>
+            <a href="./productie.html">Producție</a>
+        </div>
+        <button class="hamburger" id="hamburger" aria-label="Deschide meniul de navigare" onclick="document.getElementById('navLinks').classList.toggle('open')">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-badge">
+            <span class="dot"></span>
+            Documentație Tehnică Completă
+        </div>
+        <h1>Mașină de Vending<br><span class="gradient">Vin Vrac</span></h1>
+        <p class="subtitle">
+            Platformă interactivă cu vizualizare 3D, specificații tehnice detaliate
+            și desene de producție pentru tăiere laser / CNC. Totul într-un singur loc.
+        </p>
+        <div class="hero-actions">
+            <a href="./vizualizare.html" class="btn-primary">🧊 Vizualizare 3D</a>
+            <a href="./specificatie.html" class="btn-secondary">📋 Specificații Tehnice</a>
+        </div>
+
+        <div class="stats-bar">
+            <div class="stat-item">
+                <div class="stat-value">375L</div>
+                <div class="stat-label">Capacitate maximă</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">15×</div>
+                <div class="stat-label">Bag-in-Box 25L</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">2</div>
+                <div class="stat-label">Canale dozare</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">17</div>
+                <div class="stat-label">Piese producție</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PAGES SECTION -->
+    <section class="section" id="pages">
+        <div class="section-header">
+            <h2>Secțiuni Disponibile</h2>
+            <div class="divider"></div>
+            <p>Fiecare modul conține informații complete despre proiect, de la model 3D interactiv la desene de producție</p>
+        </div>
+
+        <div class="pages-grid">
+            <!-- Card 1: Vizualizare 3D -->
+            <a href="./vizualizare.html" class="page-card" data-card="3d">
+                <div class="page-card-visual">
+                    <span class="card-icon">🧊</span>
+                </div>
+                <div class="page-card-body">
+                    <span class="card-tag">Interactiv</span>
+                    <h3>Vizualizare 3D</h3>
+                    <p>Model tridimensional complet al mașinii cu rotire, zoom și izolare pe componente individuale.</p>
+                    <ul class="card-features">
+                        <li>Rotire 360° + zoom + pan</li>
+                        <li>Solid / Wireframe / X-Ray</li>
+                        <li>Vedere explodată</li>
+                        <li>Izolare pe componentă cu specificații</li>
+                        <li>Export PNG / GLTF</li>
+                    </ul>
+                </div>
+                <div class="page-card-footer">
+                    <span class="open-label">Deschide <span class="arrow">→</span></span>
+                </div>
+            </a>
+
+            <!-- Card 2: Specificații Tehnice -->
+            <a href="./specificatie.html" class="page-card" data-card="specs">
+                <div class="page-card-visual">
+                    <span class="card-icon">📋</span>
+                </div>
+                <div class="page-card-body">
+                    <span class="card-tag">Documentație</span>
+                    <h3>Specificații Tehnice</h3>
+                    <p>Documentație completă cu desene tehnice SVG, subsisteme detaliate și tabel BOM.</p>
+                    <ul class="card-features">
+                        <li>Vedere frontală + laterală + layout</li>
+                        <li>6 subsisteme cu schițe 2D</li>
+                        <li>Flux de operare pas cu pas</li>
+                        <li>BOM cu costuri estimate</li>
+                        <li>Export PDF optimizat</li>
+                    </ul>
+                </div>
+                <div class="page-card-footer">
+                    <span class="open-label">Deschide <span class="arrow">→</span></span>
+                </div>
+            </a>
+
+            <!-- Card 3: Desene Producție -->
+            <a href="./productie.html" class="page-card" data-card="production">
+                <div class="page-card-visual">
+                    <span class="card-icon">✂️</span>
+                </div>
+                <div class="page-card-body">
+                    <span class="card-tag">Fabricație</span>
+                    <h3>Desene de Producție</h3>
+                    <p>Piese individuale cu cote precise, pregătite pentru tăiere laser, CNC sau îndoire în producție.</p>
+                    <ul class="card-features">
+                        <li>17 piese cu cote în mm</li>
+                        <li>Cabinet, ușă, sertar, grilă, tavă</li>
+                        <li>Decupaje și găuri marcate</li>
+                        <li>Descărcare SVG individuală + fișiere DXF pentru CNC</li>
+                        <li>Export PDF batch</li>
+                    </ul>
+                </div>
+                <div class="page-card-footer">
+                    <span class="open-label">Deschide <span class="arrow">→</span></span>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- SPECS OVERVIEW -->
+    <section class="section">
+        <div class="section-header">
+            <h2>Specificații Cheie</h2>
+            <div class="divider"></div>
+            <p>Parametrii principali ai mașinii de vending</p>
+        </div>
+
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <div class="kpi-icon">📐</div>
+                <div class="kpi-value">1800×900×750</div>
+                <div class="kpi-label">Dimensiuni (mm)</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-icon">⚖️</div>
+                <div class="kpi-value">~210 / ~600 kg</div>
+                <div class="kpi-label">Greutate (gol / încărcat max)</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-icon">⚡</div>
+                <div class="kpi-value">350W</div>
+                <div class="kpi-label">Consum mediu</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-icon">❄️</div>
+                <div class="kpi-value">R600a</div>
+                <div class="kpi-label">Răcire ecologică</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-icon">🏗️</div>
+                <div class="kpi-value">AISI 304</div>
+                <div class="kpi-label">Material cabinet</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-icon">🔌</div>
+                <div class="kpi-value">ESP32</div>
+                <div class="kpi-label">Controller WiFi+BLE</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-icon">📡</div>
+                <div class="kpi-value">433MHz</div>
+                <div class="kpi-label">Telecomandă RF</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-icon">🧼</div>
+                <div class="kpi-value">HACCP</div>
+                <div class="kpi-label">Conformitate igienă</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>WineVend Pro v2.0 — Documentație tehnică generată din model 3D</p>
+        <p style="margin-top: 8px; color: var(--dim);">
+            <a href="./vizualizare.html" style="color:var(--dim);text-decoration:none;">Vizualizare 3D</a> ·
+            <a href="./specificatie.html" style="color:var(--dim);text-decoration:none;">Specificații</a> ·
+            <a href="./productie.html" style="color:var(--dim);text-decoration:none;">Producție</a>
+        </p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>WineVend Pro v2.0 — Specificație Tehnică</title>
+    <meta name="description" content="Specificație tehnică completă pentru mașina de vending vin vrac WineVend Pro v2.0 — Automat de dozare vin din BIB 20-25L controlat prin telecomandă RF 433MHz.">
+    <link rel="stylesheet" href="./spec-styles.css">
+</head>
+<body>
+
+<!-- ============================
+     NAVIGATION
+     ============================ -->
+<nav class="navbar">
+    <a href="./index.html" class="nav-brand">
+        <span class="nav-brand-icon">🍷</span>
+        <span class="nav-brand-text">WineVend Pro</span>
+    </a>
+
+    <ul class="nav-links">
+        <li><a href="#overview" class="active">Prezentare</a></li>
+        <li><a href="#technical">Desen Tehnic</a></li>
+        <li><a href="#systems">Subsisteme</a></li>
+        <li><a href="#flow">Flux Operare</a></li>
+        <li><a href="#bom">BOM</a></li>
+    </ul>
+
+    <div class="nav-actions">
+        <a href="./index.html" class="btn-icon" title="Acasă" style="text-decoration:none;">🏠</a>
+        <a href="./vizualizare.html" class="btn-icon" title="Vizualizare 3D" style="text-decoration:none;">🧊</a>
+        <a href="./productie.html" class="btn-icon" title="Producție" style="text-decoration:none;">✂️</a>
+        <button class="hamburger" aria-label="Meniu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<!-- ============================
+     HERO / PREZENTARE
+     ============================ -->
+<section id="overview" class="section hero">
+    <h1>Mașină de Vending <span>Vin Vrac</span></h1>
+    <p class="subtitle">
+        Automat de dozare vin vrac din ambalaje Bag-in-Box 25L, operat prin telecomandă RF 433MHz. 
+        15 BIB (5 rânduri × 3 coloane) pentru autonomie maximă de 375L. Vânzătorul verifică vârsta, încasează plata, 
+        apoi comandă dozarea prin 2 canale (Alb + Roșu). Răcire 4-8°C, igienă HACCP.
+    </p>
+
+    <div class="kpi-grid">
+        <div class="kpi-card">
+            <div class="kpi-icon">📐</div>
+            <div class="kpi-value">1800×900×750</div>
+            <div class="kpi-label">Dimensiuni (mm)</div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-icon">⚖️</div>
+            <div class="kpi-value">~210 kg</div>
+            <div class="kpi-label">Greutate (gol)</div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-icon">⚡</div>
+            <div class="kpi-value">350W</div>
+            <div class="kpi-label">Consum mediu</div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-icon">❄️</div>
+            <div class="kpi-value">R600a</div>
+            <div class="kpi-label">Răcire Ecologică</div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================
+     DESEN TEHNIC (Tabs)
+     ============================ -->
+<section id="technical" class="section">
+    <div class="section-header">
+        <h2>Desen Tehnic</h2>
+        <div class="section-divider"></div>
+        <p>Vedere frontală și secțiune transversală</p>
+    </div>
+
+    <div class="tabs-container">
+        <div class="tabs-header">
+            <button class="tab-btn active" data-target="tabFront">Vedere Frontală</button>
+            <button class="tab-btn" data-target="tabSide">Secțiune Laterală</button>
+            <button class="tab-btn" data-target="tabLayout">Layout Intern</button>
+        </div>
+
+        <!-- Tab 1: Vedere Frontală (fidel cu modelul 3D) -->
+        <div id="tabFront" class="tab-content active">
+            <div class="drawing-label">VEDERE FRONTALĂ — Scara 1:2.5</div>
+            <p class="drawing-hint">🔍 Apasă pe desen pentru a mări</p>
+            <div class="drawing-container">
+                <svg viewBox="0 0 820 1100" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:680px">
+                    <defs>
+                        <linearGradient id="steelGrad" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="#6a6a7a"/>
+                            <stop offset="100%" stop-color="#555566"/>
+                        </linearGradient>
+                        <linearGradient id="darkPanelGrad" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="#3a3a4a"/>
+                            <stop offset="100%" stop-color="#2a2a3a"/>
+                        </linearGradient>
+                        <linearGradient id="wineLabel" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="#1a0a0a"/>
+                            <stop offset="50%" stop-color="#2a1515"/>
+                            <stop offset="100%" stop-color="#0d0505"/>
+                        </linearGradient>
+                        <linearGradient id="nozzleRed" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="#c5737a"/>
+                            <stop offset="100%" stop-color="#8b2030"/>
+                        </linearGradient>
+                    </defs>
+
+                    <!-- ========== CABINET EXTERIOR (AISI 304) ========== -->
+                    <rect x="110" y="40" width="500" height="980" rx="3" fill="url(#steelGrad)" stroke="#888899" stroke-width="2"/>
+
+                    <!-- ========== 1. PANOU FRONTAL SUPERIOR — Branding Aproape Wine ========== -->
+                    <rect x="115" y="45" width="490" height="110" rx="2" fill="#0d0505" stroke="#555566" stroke-width="1"/>
+                    <!-- Bordura aurie subtilă -->
+                    <rect x="122" y="52" width="476" height="96" rx="2" fill="none" stroke="rgba(201,168,76,0.35)" stroke-width="0.8"/>
+
+                    <!-- Logo complet — WINE Aproape -->
+                    <!-- Mâini stilizate (stânga) -->
+                    <path d="M155,70 Q175,60 190,75 L195,68 L198,60" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1" stroke-linecap="round"/>
+                    <!-- Mâini stilizate (dreapta) -->
+                    <path d="M230,72 Q210,62 198,75 L192,68 L190,60" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1" stroke-linecap="round"/>
+                    <!-- Fir auriu -->
+                    <path d="M150,82 Q175,70 205,80 Q225,72 240,78" fill="none" stroke="rgba(201,168,76,0.7)" stroke-width="0.8"/>
+                    <!-- Separator vertical -->
+                    <line x1="258" y1="58" x2="258" y2="140" stroke="rgba(201,168,76,0.3)" stroke-width="0.5"/>
+                    <!-- Text WINE mic -->
+                    <text x="280" y="80" fill="rgba(201,168,76,0.7)" font-size="10" font-family="Georgia, serif" letter-spacing="4">W I N E</text>
+                    <!-- Text APROAPE mare auriu -->
+                    <text x="270" y="112" fill="#c9a84c" font-size="30" font-family="Georgia, serif" font-weight="bold" font-style="italic">Aproape</text>
+                    <!-- Linie sub text -->
+                    <line x1="270" y1="120" x2="500" y2="120" stroke="rgba(201,168,76,0.4)" stroke-width="0.5"/>
+
+                    <!-- LCD 20x4 (ecran verde) -->
+                    <rect x="135" y="62" width="100" height="42" rx="4" fill="#0a1a0a" stroke="#22aa44" stroke-width="1.2"/>
+                    <rect x="140" y="67" width="90" height="32" rx="2" fill="#0d200d"/>
+                    <text x="152" y="82" fill="#22aa44" font-family="JetBrains Mono, monospace" font-size="8">WINE  Aproape</text>
+                    <text x="152" y="93" fill="#22aa44" font-family="JetBrains Mono, monospace" font-size="7">CANAL:1 | 0.5L</text>
+
+                    <!-- Modul RF 433MHz -->
+                    <rect x="530" y="65" width="50" height="35" rx="3" fill="#223322" stroke="#5a5775" stroke-width="0.8"/>
+                    <circle cx="555" cy="76" r="5" fill="none" stroke="#c9a84c" stroke-width="1"/>
+                    <line x1="555" y1="71" x2="555" y2="67" stroke="#c9a84c" stroke-width="0.8"/>
+                    <text x="538" y="95" fill="#8a87a0" font-size="7">RF 433MHz</text>
+
+                    <!-- 4 LED-uri status canal -->
+                    <circle cx="505" cy="80" r="4" fill="#f0e68c" opacity="0.9"/>
+                    <circle cx="505" cy="92" r="4" fill="#ffb6c1" opacity="0.9"/>
+                    <circle cx="517" cy="80" r="4" fill="#c5737a" opacity="0.9"/>
+                    <circle cx="517" cy="92" r="4" fill="#8b2030" opacity="0.9"/>
+
+                    <!-- ========== 2. UȘA DE SERVICE (4 piese cu decupaj sertar, conform 3D) ========== -->
+                    <!-- Ușa e formată din 4 panouri care lasă un dreptunghi gol pentru sertar -->
+                    
+                    <!-- Panou ușă — SUS (de la y=170 la y=340, lățimea ușii completa) -->
+                    <rect x="130" y="170" width="460" height="115" rx="2" fill="#6a6a7a" stroke="#7a7a8a" stroke-width="1.2"/>
+                    <!-- Linie orizontală demarcație sudură -->
+                    <line x1="135" y1="283" x2="585" y2="283" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+
+                    <!-- Panou ușă — JOS (de la y=620 la y=740) -->
+                    <rect x="130" y="620" width="460" height="120" rx="2" fill="#6a6a7a" stroke="#7a7a8a" stroke-width="1.2"/>
+                    <line x1="135" y1="622" x2="585" y2="622" stroke="rgba(255,255,255,0.08)" stroke-width="0.5"/>
+
+                    <!-- Panou ușă — STÂNGA (lateral, între panourile sus/jos) -->
+                    <rect x="130" y="285" width="115" height="335" rx="1" fill="#6a6a7a" stroke="#7a7a8a" stroke-width="1.2"/>
+
+                    <!-- Panou ușă — DREAPTA (lateral, între panourile sus/jos) -->
+                    <rect x="475" y="285" width="115" height="335" rx="1" fill="#6a6a7a" stroke="#7a7a8a" stroke-width="1.2"/>
+
+                    <!-- Mâner ușă (pe panoul din dreapta) -->
+                    <rect x="572" y="440" width="8" height="45" rx="3" fill="#aaaabb" stroke="#ccccdd" stroke-width="0.5"/>
+                    <!-- Broasca/zăvor -->
+                    <circle cx="576" cy="428" r="4" fill="none" stroke="#aaaabb" stroke-width="1"/>
+
+                    <!-- ========== 3. SERTAR DOZARE (vizibil prin decupajul ușii) ========== -->
+                    <!-- Decupajul ușii = spațiul 245-475 pe X, 285-620 pe Y -->
+                    <!-- Fundalul interior (peretele din spate al sertarului) -->
+                    <rect x="245" y="285" width="230" height="335" rx="2" fill="#2a2a3a" stroke="#555566" stroke-width="1"/>
+
+                    <!-- Perete spate sertar (vizibil ca o placă metalică) -->
+                    <rect x="250" y="290" width="220" height="280" rx="1" fill="#3a3a4a" stroke="#4a4a5a" stroke-width="0.8"/>
+
+                    <!-- Pereți laterali sertar (perspectivă subtilă — linii verticale) -->
+                    <line x1="250" y1="290" x2="250" y2="570" stroke="#5a5a6a" stroke-width="1.5"/>
+                    <line x1="470" y1="290" x2="470" y2="570" stroke="#5a5a6a" stroke-width="1.5"/>
+                    <!-- Perete sus sertar -->
+                    <line x1="250" y1="290" x2="470" y2="290" stroke="#5a5a6a" stroke-width="1.5"/>
+
+                    <!-- ═══ DOZATOR VIN ALB (stânga) ═══ -->
+                    <!-- Corp dozator cilindric -->
+                    <rect x="290" y="320" width="40" height="90" rx="4" fill="#aaaabb" stroke="#bbbccc" stroke-width="0.8"/>
+                    <!-- Capac superior -->
+                    <rect x="293" y="318" width="34" height="8" rx="3" fill="#999aab" stroke="#bbbccc" stroke-width="0.5"/>
+                    <!-- Inel indicator culoare -->
+                    <circle cx="310" cy="315" r="10" fill="none" stroke="#f0e68c" stroke-width="2.5"/>
+                    <!-- Duză ieșire (cilindrică, coborând din corp) -->
+                    <rect x="306" y="410" width="8" height="30" rx="2" fill="#999aab" stroke="#aaaabb" stroke-width="0.5"/>
+                    <!-- Picătură stilizată -->
+                    <ellipse cx="310" cy="445" rx="4" ry="5" fill="rgba(240,230,140,0.25)" stroke="#f0e68c" stroke-width="0.5"/>
+                    <!-- Etichetă -->
+                    <text x="310" y="465" fill="#f0e68c" font-size="9" font-weight="600" text-anchor="middle">VIN ALB</text>
+
+                    <!-- ═══ DOZATOR VIN ROȘU (dreapta) ═══ -->
+                    <!-- Corp dozator cilindric -->
+                    <rect x="390" y="320" width="40" height="90" rx="4" fill="#aaaabb" stroke="#bbbccc" stroke-width="0.8"/>
+                    <!-- Capac superior -->
+                    <rect x="393" y="318" width="34" height="8" rx="3" fill="#999aab" stroke="#bbbccc" stroke-width="0.5"/>
+                    <!-- Inel indicator culoare -->
+                    <circle cx="410" cy="315" r="10" fill="none" stroke="#c5737a" stroke-width="2.5"/>
+                    <!-- Duză ieșire -->
+                    <rect x="406" y="410" width="8" height="30" rx="2" fill="#999aab" stroke="#aaaabb" stroke-width="0.5"/>
+                    <!-- Picătură stilizată -->
+                    <ellipse cx="410" cy="445" rx="4" ry="5" fill="rgba(139,32,48,0.3)" stroke="#c5737a" stroke-width="0.5"/>
+                    <!-- Etichetă -->
+                    <text x="410" y="465" fill="#c5737a" font-size="9" font-weight="600" text-anchor="middle">VIN ROȘU</text>
+
+                    <!-- ═══ GRILĂ SCURGERE (7 bare orizontale, conform 3D) ═══ -->
+                    <g>
+                        <line x1="260" y1="490" x2="460" y2="490" stroke="#888899" stroke-width="1.2"/>
+                        <line x1="260" y1="496" x2="460" y2="496" stroke="#888899" stroke-width="1.2"/>
+                        <line x1="260" y1="502" x2="460" y2="502" stroke="#888899" stroke-width="1.2"/>
+                        <line x1="260" y1="508" x2="460" y2="508" stroke="#888899" stroke-width="1.2"/>
+                        <line x1="260" y1="514" x2="460" y2="514" stroke="#888899" stroke-width="1.2"/>
+                        <line x1="260" y1="520" x2="460" y2="520" stroke="#888899" stroke-width="1.2"/>
+                        <line x1="260" y1="526" x2="460" y2="526" stroke="#888899" stroke-width="1.2"/>
+                    </g>
+
+                    <!-- ═══ TAVĂ COLECTARE (recipient acumulare, sub grilă) ═══ -->
+                    <rect x="255" y="535" width="210" height="28" rx="3" fill="#334455" stroke="#445566" stroke-width="1"/>
+                    <text x="360" y="553" fill="#8a87a0" font-size="7" text-anchor="middle">TAVĂ COLECTARE</text>
+
+                    <!-- Bordura inferioară a sertarului -->
+                    <line x1="250" y1="570" x2="470" y2="570" stroke="#5a5a6a" stroke-width="1.5"/>
+
+                    <!-- Nișă recipient (sub sertar, vizibilă prin decupaj) -->
+                    <rect x="280" y="575" width="160" height="35" rx="4" fill="rgba(255,255,255,0.03)" stroke="#5a5775" stroke-width="0.8"/>
+                    <text x="360" y="597" fill="#8a87a0" font-size="8" text-anchor="middle">NIȘĂ RECIPIENT</text>
+                    <!-- Senzor IR -->
+                    <circle cx="450" cy="592" r="3" fill="#e74c3c" opacity="0.7"/>
+                    <text x="458" y="595" fill="#8a87a0" font-size="5">IR</text>
+
+                    <!-- ========== 4. PANOU FRONTAL INFERIOR (Zona tehnică) ========== -->
+                    <rect x="115" y="745" width="490" height="190" rx="2" fill="url(#darkPanelGrad)" stroke="#555566" stroke-width="1"/>
+
+                    <!-- Grile ventilare (5 coloane × 3 rânduri) -->
+                    <g opacity="0.5">
+                        <rect x="170" y="790" width="55" height="3" rx="1" fill="#555566" stroke="#666677" stroke-width="0.3"/>
+                        <rect x="170" y="798" width="55" height="3" rx="1" fill="#555566" stroke="#666677" stroke-width="0.3"/>
+                        <rect x="170" y="806" width="55" height="3" rx="1" fill="#555566" stroke="#666677" stroke-width="0.3"/>
+
+                        <rect x="240" y="790" width="55" height="3" rx="1" fill="#555566" stroke="#666677" stroke-width="0.3"/>
+                        <rect x="240" y="798" width="55" height="3" rx="1" fill="#555566" stroke="#666677" stroke-width="0.3"/>
+                        <rect x="240" y="806" width="55" height="3" rx="1" fill="#555566" stroke="#666677" stroke-width="0.3"/>
+
+                        <rect x="310" y="790" width="55" height="3" rx="1" fill="#555566" stroke="#666677" stroke-width="0.3"/>
+                        <rect x="310" y="798" width="55" height="3" rx="1" fill="#555566" stroke="#666677" stroke-width="0.3"/>
+                        <rect x="310" y="806" width="55" height="3" rx="1" fill="#555566" stroke="#666677" stroke-width="0.3"/>
+
+                        <rect x="380" y="790" width="55" height="3" rx="1" fill="#555566" stroke="#666677" stroke-width="0.3"/>
+                        <rect x="380" y="798" width="55" height="3" rx="1" fill="#555566" stroke="#666677" stroke-width="0.3"/>
+                        <rect x="380" y="806" width="55" height="3" rx="1" fill="#555566" stroke="#666677" stroke-width="0.3"/>
+
+                        <rect x="450" y="790" width="55" height="3" rx="1" fill="#555566" stroke="#666677" stroke-width="0.3"/>
+                        <rect x="450" y="798" width="55" height="3" rx="1" fill="#555566" stroke="#666677" stroke-width="0.3"/>
+                        <rect x="450" y="806" width="55" height="3" rx="1" fill="#555566" stroke="#666677" stroke-width="0.3"/>
+                    </g>
+
+                    <!-- ========== 5. PICIOARE REGLABILE ========== -->
+                    <rect x="180" y="1020" width="20" height="18" rx="3" fill="#444455" stroke="#555566" stroke-width="0.8"/>
+                    <ellipse cx="190" cy="1038" rx="12" ry="4" fill="#333344"/>
+                    <rect x="520" y="1020" width="20" height="18" rx="3" fill="#444455" stroke="#555566" stroke-width="0.8"/>
+                    <ellipse cx="530" cy="1038" rx="12" ry="4" fill="#333344"/>
+
+                    <!-- ========== COTE DIMENSIONALE ========== -->
+                    <line x1="660" y1="40" x2="660" y2="1020" stroke="#c9a84c" stroke-width="0.8"/>
+                    <line x1="650" y1="40" x2="670" y2="40" stroke="#c9a84c" stroke-width="0.8"/>
+                    <line x1="650" y1="1020" x2="670" y2="1020" stroke="#c9a84c" stroke-width="0.8"/>
+                    <text x="675" y="535" fill="#c9a84c" font-size="12" font-family="JetBrains Mono, monospace" transform="rotate(90,675,535)">1800 mm</text>
+
+                    <line x1="110" y1="1055" x2="610" y2="1055" stroke="#c9a84c" stroke-width="0.8"/>
+                    <line x1="110" y1="1045" x2="110" y2="1065" stroke="#c9a84c" stroke-width="0.8"/>
+                    <line x1="610" y1="1045" x2="610" y2="1065" stroke="#c9a84c" stroke-width="0.8"/>
+                    <text x="325" y="1075" fill="#c9a84c" font-size="12" font-family="JetBrains Mono, monospace" text-anchor="middle">900 mm</text>
+
+                    <line x1="70" y1="45" x2="70" y2="155" stroke="#c9a84c" stroke-width="0.6" stroke-dasharray="3 2"/>
+                    <line x1="62" y1="45" x2="78" y2="45" stroke="#c9a84c" stroke-width="0.6"/>
+                    <line x1="62" y1="155" x2="78" y2="155" stroke="#c9a84c" stroke-width="0.6"/>
+                    <text x="42" y="105" fill="#c9a84c" font-size="9" font-family="JetBrains Mono" text-anchor="middle" transform="rotate(-90,42,105)">200</text>
+
+                    <line x1="70" y1="170" x2="70" y2="740" stroke="#c9a84c" stroke-width="0.6" stroke-dasharray="3 2"/>
+                    <line x1="62" y1="170" x2="78" y2="170" stroke="#c9a84c" stroke-width="0.6"/>
+                    <line x1="62" y1="740" x2="78" y2="740" stroke="#c9a84c" stroke-width="0.6"/>
+                    <text x="42" y="460" fill="#c9a84c" font-size="9" font-family="JetBrains Mono" text-anchor="middle" transform="rotate(-90,42,460)">1000</text>
+
+                    <line x1="70" y1="745" x2="70" y2="1020" stroke="#c9a84c" stroke-width="0.6" stroke-dasharray="3 2"/>
+                    <line x1="62" y1="745" x2="78" y2="745" stroke="#c9a84c" stroke-width="0.6"/>
+                    <line x1="62" y1="1020" x2="78" y2="1020" stroke="#c9a84c" stroke-width="0.6"/>
+                    <text x="42" y="885" fill="#c9a84c" font-size="9" font-family="JetBrains Mono" text-anchor="middle" transform="rotate(-90,42,885)">340</text>
+
+                    <!-- ========== ETICHETE ZONE (dreapta) ========== -->
+                    <line x1="610" y1="100" x2="650" y2="100" stroke="#c9a84c" stroke-width="0.5" stroke-dasharray="3 2"/>
+                    <text x="655" y="104" fill="#c9a84c" font-size="10" font-family="JetBrains Mono">ZONA INTERFAȚĂ</text>
+                    <text x="655" y="117" fill="#8a87a0" font-size="8">LCD + RF + LEDs</text>
+
+                    <line x1="590" y1="250" x2="650" y2="250" stroke="#c9a84c" stroke-width="0.5" stroke-dasharray="3 2"/>
+                    <text x="655" y="245" fill="#c9a84c" font-size="10" font-family="JetBrains Mono">UȘĂ SERVICE</text>
+                    <text x="655" y="258" fill="#8a87a0" font-size="8">4 panouri cu decupaj</text>
+
+                    <line x1="475" y1="400" x2="650" y2="400" stroke="#c5737a" stroke-width="0.5" stroke-dasharray="3 2"/>
+                    <text x="655" y="395" fill="#c5737a" font-size="10" font-family="JetBrains Mono">SERTAR DOZARE</text>
+                    <text x="655" y="408" fill="#8a87a0" font-size="8">2 dozatoare + grilă + tavă</text>
+
+                    <line x1="610" y1="830" x2="650" y2="830" stroke="#c9a84c" stroke-width="0.5" stroke-dasharray="3 2"/>
+                    <text x="655" y="825" fill="#c9a84c" font-size="10" font-family="JetBrains Mono">ZONA TEHNICĂ</text>
+                    <text x="655" y="838" fill="#8a87a0" font-size="8">Grile ventilare compresor</text>
+                </svg>
+            </div>
+        </div>
+
+        <!-- Tab 2: Secțiune Laterală (fidel cu modelul 3D) -->
+        <div id="tabSide" class="tab-content">
+            <div class="drawing-label">SECȚIUNE LATERALĂ — Scara 1:2.5</div>
+            <p class="drawing-hint">🔍 Apasă pe desen pentru a mări</p>
+            <div class="drawing-container">
+                <svg viewBox="0 0 650 1050" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:540px">
+                    <!-- Cabinet lateral (D=750mm) -->
+                    <rect x="100" y="40" width="350" height="900" rx="3" fill="url(#steelGrad)" stroke="#888899" stroke-width="2"/>
+
+                    <!-- Izolatie PU 40mm (doar pe peretele din spate, conform 3D) -->
+                    <rect x="105" y="45" width="25" height="890" fill="rgba(204,187,102,0.2)" stroke="#ccbb66" stroke-width="0.8"/>
+                    <text x="112" y="500" fill="#ccbb66" font-size="8" transform="rotate(-90,112,500)">PU 40mm IZOLAȚIE</text>
+
+                    <!-- Zona interfata top (LCD + branding) -->
+                    <rect x="135" y="50" width="310" height="90" rx="3" fill="#0d0505" stroke="#555566" stroke-width="1"/>
+                    <rect x="140" y="58" width="60" height="28" rx="3" fill="#0a1a0a" stroke="#22aa44" stroke-width="0.8"/>
+                    <text x="147" y="75" fill="#22aa44" font-size="7" font-family="JetBrains Mono">LCD</text>
+                    <text x="220" y="80" fill="#c9a84c" font-size="16" font-family="Georgia, serif" font-style="italic" font-weight="bold">Aproape</text>
+                    <text x="220" y="66" fill="rgba(201,168,76,0.6)" font-size="7" font-family="Georgia, serif" letter-spacing="3">WINE</text>
+
+                    <!-- Usa de service (fata, dreapta in sectiune) -->
+                    <rect x="440" y="50" width="5" height="560" fill="#7a7a8a" stroke="#888899" stroke-width="0.8"/>
+                    <text x="455" y="330" fill="#8a87a0" font-size="8" transform="rotate(90,455,330)">UȘĂ SERVICE</text>
+
+                    <!-- Sertar dozare (proiectat in fata) -->
+                    <rect x="340" y="155" width="105" height="120" rx="2" fill="#2a2a3a" stroke="#aaaabb" stroke-width="1"/>
+                    <!-- Dozatoare -->
+                    <line x1="370" y1="180" x2="370" y2="210" stroke="#aaaabb" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="410" y1="180" x2="410" y2="210" stroke="#aaaabb" stroke-width="2" stroke-linecap="round"/>
+                    <text x="355" y="220" fill="#f0e68c" font-size="6">Alb</text>
+                    <text x="400" y="220" fill="#c5737a" font-size="6">Roșu</text>
+                    <!-- Tava colectare -->
+                    <rect x="345" y="250" width="95" height="15" rx="2" fill="#334455" stroke="#445566" stroke-width="0.5"/>
+                    <text x="360" y="260" fill="#8a87a0" font-size="5">Tavă colect.</text>
+
+                    <!-- Zona BIB — 5 rânduri × 3 coloane (secțiune arată 5 rânduri, 1 coloană adâncime) -->
+                    <rect x="135" y="155" width="195" height="500" rx="3" fill="none" stroke="#5a5775" stroke-width="1"/>
+                    <text x="175" y="410" fill="#5a5775" font-size="11" font-weight="600">STOCARE BIB</text>
+                    <text x="170" y="428" fill="#8a87a0" font-size="9">15× BIB 25L (5×3)</text>
+                    <!-- 5 rafturi -->
+                    <line x1="135" y1="255" x2="330" y2="255" stroke="#5a5775" stroke-width="0.5" stroke-dasharray="4 2"/>
+                    <line x1="135" y1="355" x2="330" y2="355" stroke="#5a5775" stroke-width="0.5" stroke-dasharray="4 2"/>
+                    <line x1="135" y1="455" x2="330" y2="455" stroke="#5a5775" stroke-width="0.5" stroke-dasharray="4 2"/>
+                    <line x1="135" y1="555" x2="330" y2="555" stroke="#5a5775" stroke-width="0.5" stroke-dasharray="4 2"/>
+                    <!-- BIB (bloc mic) rândurile -->
+                    <rect x="145" y="170" width="170" height="75" rx="2" fill="rgba(240,230,140,0.08)" stroke="rgba(240,230,140,0.2)" stroke-width="0.5"/>
+                    <rect x="145" y="270" width="170" height="75" rx="2" fill="rgba(240,230,140,0.08)" stroke="rgba(240,230,140,0.2)" stroke-width="0.5"/>
+                    <rect x="145" y="370" width="170" height="75" rx="2" fill="rgba(240,230,140,0.08)" stroke="rgba(240,230,140,0.2)" stroke-width="0.5"/>
+                    <rect x="145" y="470" width="170" height="75" rx="2" fill="rgba(139,32,48,0.1)" stroke="rgba(139,32,48,0.25)" stroke-width="0.5"/>
+                    <rect x="145" y="570" width="170" height="75" rx="2" fill="rgba(139,32,48,0.1)" stroke="rgba(139,32,48,0.25)" stroke-width="0.5"/>
+                    <!-- Senzor temp -->
+                    <circle cx="300" cy="210" r="4" fill="#3498db"/>
+                    <text x="310" y="213" fill="#8a87a0" font-size="7">4-8°C</text>
+
+                    <!-- Zona tehnică (sub BIB-uri) -->
+                    <rect x="135" y="680" width="310" height="250" rx="3" fill="rgba(34,34,51,0.5)" stroke="#5a5775" stroke-width="1"/>
+                    <!-- Compresor -->
+                    <circle cx="210" cy="790" r="35" fill="none" stroke="#334455" stroke-width="2"/>
+                    <circle cx="210" cy="790" r="20" fill="none" stroke="#222233" stroke-width="1.5"/>
+                    <text x="190" y="795" fill="#8a87a0" font-size="8">Compresor</text>
+                    <text x="195" y="810" fill="#8a87a0" font-size="7">R600a</text>
+                    <!-- Pompe peristaltice (2x, cate una per canal) -->
+                    <circle cx="320" cy="775" r="13" fill="none" stroke="#334455" stroke-width="1.5"/>
+                    <circle cx="352" cy="775" r="13" fill="none" stroke="#334455" stroke-width="1.5"/>
+                    <text x="300" y="805" fill="#8a87a0" font-size="7">2× Pompe (Alb/Roșu)</text>
+                    <!-- PSU -->
+                    <rect x="300" y="830" width="80" height="50" rx="4" fill="none" stroke="#334455" stroke-width="1.5"/>
+                    <text x="310" y="858" fill="#8a87a0" font-size="8">PSU 24V</text>
+                    <text x="310" y="870" fill="#8a87a0" font-size="6">Mean Well</text>
+                    <!-- PCB ESP32 -->
+                    <rect x="390" y="730" width="45" height="30" rx="2" fill="#1a4a2a" stroke="#22aa44" stroke-width="0.8"/>
+                    <text x="395" y="748" fill="#22aa44" font-size="6">ESP32</text>
+
+                    <!-- Cote -->
+                    <text x="510" y="505" fill="#c9a84c" font-size="11" font-family="JetBrains Mono" transform="rotate(90,510,505)">1800 mm</text>
+                    <line x1="490" y1="40" x2="490" y2="940" stroke="#c9a84c" stroke-width="0.8"/>
+                    <line x1="480" y1="40" x2="500" y2="40" stroke="#c9a84c" stroke-width="0.8"/>
+                    <line x1="480" y1="940" x2="500" y2="940" stroke="#c9a84c" stroke-width="0.8"/>
+
+                    <text x="275" y="975" fill="#c9a84c" font-size="11" font-family="JetBrains Mono" text-anchor="middle">750 mm</text>
+                    <line x1="100" y1="960" x2="450" y2="960" stroke="#c9a84c" stroke-width="0.8"/>
+                    <line x1="100" y1="950" x2="100" y2="970" stroke="#c9a84c" stroke-width="0.8"/>
+                    <line x1="450" y1="950" x2="450" y2="970" stroke="#c9a84c" stroke-width="0.8"/>
+
+                    <!-- Etichete zone -->
+                    <line x1="450" y1="95" x2="490" y2="95" stroke="#c9a84c" stroke-width="0.5" stroke-dasharray="3 2"/>
+                    <text x="495" y="90" fill="#c9a84c" font-size="9" font-family="JetBrains Mono">INTERFAȚĂ</text>
+                    <text x="495" y="102" fill="#8a87a0" font-size="7">LCD + RF</text>
+
+                    <line x1="330" y1="400" x2="490" y2="400" stroke="#c9a84c" stroke-width="0.5" stroke-dasharray="3 2"/>
+                    <text x="495" y="395" fill="#c9a84c" font-size="9" font-family="JetBrains Mono">STOCARE</text>
+                    <text x="495" y="407" fill="#8a87a0" font-size="7">15× BIB 25L</text>
+
+                    <line x1="445" y1="800" x2="490" y2="800" stroke="#c9a84c" stroke-width="0.5" stroke-dasharray="3 2"/>
+                    <text x="495" y="795" fill="#c9a84c" font-size="9" font-family="JetBrains Mono">ZONA TEHNICĂ</text>
+                    <text x="495" y="807" fill="#8a87a0" font-size="7">Compr. + Pompe + PSU</text>
+                </svg>
+            </div>
+        </div>
+
+        <!-- Tab 3: Layout Intern (fidel cu modelul 3D) -->
+        <div id="tabLayout" class="tab-content">
+            <div class="drawing-label">LAYOUT INTERN — Vedere de Sus (Top)</div>
+            <p class="drawing-hint">🔍 Apasă pe desen pentru a mări</p>
+            <div class="drawing-container">
+                <svg viewBox="0 0 750 550" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:650px">
+                    <defs>
+                        <marker id="arrow2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#c5737a"/></marker>
+                    </defs>
+
+                    <!-- Cabinet outline (900mm × 750mm) -->
+                    <rect x="50" y="30" width="560" height="440" rx="4" fill="url(#steelGrad)" stroke="#888899" stroke-width="2"/>
+
+                    <!-- Perete spate -->
+                    <rect x="55" y="35" width="550" height="8" rx="1" fill="#888899" stroke="#999aab" stroke-width="0.5"/>
+                    <text x="280" y="30" fill="#8a87a0" font-size="8" text-anchor="middle">PERETE SPATE (AISI 304)</text>
+
+                    <!-- Izolatie PU pe spate -->
+                    <rect x="55" y="43" width="550" height="20" fill="rgba(204,187,102,0.2)" stroke="#ccbb66" stroke-width="0.5"/>
+                    <text x="330" y="57" fill="#ccbb66" font-size="7" text-anchor="middle">IZOLAȚIE PU 40mm</text>
+
+                    <!-- Zona BIB grid 3 coloane × adâncime -->
+                    <rect x="70" y="70" width="400" height="310" rx="4" fill="none" stroke="#5a5775" stroke-width="1"/>
+
+                    <!-- 3 coloane BIB -->
+                    <rect x="80" y="80" width="120" height="290" rx="3" fill="rgba(240,230,140,0.06)" stroke="rgba(240,230,140,0.2)" stroke-width="0.5"/>
+                    <text x="115" y="230" fill="#f0e68c" font-size="9" text-anchor="middle">COL 1</text>
+                    <text x="115" y="245" fill="#8a87a0" font-size="7" text-anchor="middle">5× BIB</text>
+
+                    <rect x="210" y="80" width="120" height="290" rx="3" fill="rgba(240,230,140,0.06)" stroke="rgba(240,230,140,0.2)" stroke-width="0.5"/>
+                    <text x="270" y="230" fill="#f0e68c" font-size="9" text-anchor="middle">COL 2</text>
+                    <text x="270" y="245" fill="#8a87a0" font-size="7" text-anchor="middle">5× BIB</text>
+
+                    <rect x="340" y="80" width="120" height="290" rx="3" fill="rgba(139,32,48,0.08)" stroke="rgba(139,32,48,0.2)" stroke-width="0.5"/>
+                    <text x="400" y="230" fill="#c5737a" font-size="9" text-anchor="middle">COL 3</text>
+                    <text x="400" y="245" fill="#8a87a0" font-size="7" text-anchor="middle">5× BIB</text>
+
+                    <!-- Sertar dozare + ușă (zona frontală) -->
+                    <rect x="70" y="395" width="400" height="60" rx="3" fill="rgba(122,122,138,0.3)" stroke="#7a7a8a" stroke-width="1"/>
+                    <text x="270" y="430" fill="#7a7a8a" font-size="10" text-anchor="middle" font-weight="600">UȘĂ SERVICE + SERTAR DOZARE</text>
+                    <!-- Dozatoare -->
+                    <circle cx="230" cy="420" r="6" fill="none" stroke="#f0e68c" stroke-width="1.5"/>
+                    <text x="230" y="415" fill="#f0e68c" font-size="5" text-anchor="middle">ALB</text>
+                    <circle cx="310" cy="420" r="6" fill="none" stroke="#c5737a" stroke-width="1.5"/>
+                    <text x="310" y="415" fill="#c5737a" font-size="5" text-anchor="middle">ROȘU</text>
+
+                    <!-- Zona tehnică (dreapta, sub BIB) -->
+                    <rect x="480" y="70" width="120" height="310" rx="4" fill="rgba(34,34,51,0.4)" stroke="#5a5775" stroke-width="1"/>
+                    <text x="540" y="95" fill="#c9a84c" font-size="9" text-anchor="middle" font-weight="600">ZONA</text>
+                    <text x="540" y="108" fill="#c9a84c" font-size="9" text-anchor="middle" font-weight="600">TEHNICĂ</text>
+
+                    <!-- Compresor -->
+                    <circle cx="540" cy="165" r="25" fill="none" stroke="#334455" stroke-width="2"/>
+                    <circle cx="540" cy="165" r="14" fill="none" stroke="#222233" stroke-width="1"/>
+                    <text x="540" y="168" fill="#8a87a0" font-size="7" text-anchor="middle">Compresor</text>
+
+                    <!-- Pompe (2x) -->
+                    <circle cx="513" cy="240" r="9" fill="none" stroke="#334455" stroke-width="1.5"/>
+                    <circle cx="533" cy="240" r="9" fill="none" stroke="#334455" stroke-width="1.5"/>
+                    <text x="523" y="256" fill="#8a87a0" font-size="6" text-anchor="middle">2× Pompe</text>
+
+                    <!-- PSU -->
+                    <rect x="495" y="280" width="60" height="35" rx="3" fill="none" stroke="#334455" stroke-width="1"/>
+                    <text x="525" y="300" fill="#8a87a0" font-size="7" text-anchor="middle">PSU 24V</text>
+
+                    <!-- ESP32 PCB -->
+                    <rect x="510" y="330" width="40" height="20" rx="2" fill="#1a4a2a" stroke="#22aa44" stroke-width="0.8"/>
+                    <text x="530" y="343" fill="#22aa44" font-size="6" text-anchor="middle">ESP32</text>
+
+                    <!-- Arrows: BIB -> Pompa -> Dozator -->
+                    <line x1="460" y1="230" x2="508" y2="237" stroke="#c5737a" stroke-width="1" marker-end="url(#arrow2)"/>
+                    <line x1="520" y1="253" x2="310" y2="414" stroke="#c5737a" stroke-width="1" marker-end="url(#arrow2)"/>
+
+                    <!-- Cote -->
+                    <text x="330" y="500" fill="#c9a84c" font-size="10" font-family="JetBrains Mono" text-anchor="middle">900 mm</text>
+                    <line x1="50" y1="488" x2="610" y2="488" stroke="#c9a84c" stroke-width="0.8"/>
+                    <line x1="50" y1="480" x2="50" y2="496" stroke="#c9a84c" stroke-width="0.8"/>
+                    <line x1="610" y1="480" x2="610" y2="496" stroke="#c9a84c" stroke-width="0.8"/>
+
+                    <text x="640" y="260" fill="#c9a84c" font-size="10" font-family="JetBrains Mono" transform="rotate(90,640,260)">750 mm</text>
+                    <line x1="625" y1="30" x2="625" y2="470" stroke="#c9a84c" stroke-width="0.8"/>
+                    <line x1="617" y1="30" x2="633" y2="30" stroke="#c9a84c" stroke-width="0.8"/>
+                    <line x1="617" y1="470" x2="633" y2="470" stroke="#c9a84c" stroke-width="0.8"/>
+                </svg>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================
+     SUBSISTEME
+     ============================ -->
+<section id="systems" class="section">
+    <div class="section-header">
+        <h2>Subsisteme</h2>
+        <div class="section-divider"></div>
+        <p>Componentele principale ale mașinii de vending</p>
+    </div>
+
+    <div class="subsystem-grid">
+        <!-- Stocare -->
+        <div class="subsystem-card">
+            <div class="card-sketch">
+                <svg viewBox="0 0 200 140" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Cabinet outline -->
+                    <rect x="20" y="10" width="160" height="120" rx="3" fill="none" stroke="#5a5775" stroke-width="1.5"/>
+                    <!-- 5 rânduri × 3 coloane BIB -->
+                    <g>
+                        <!-- Rând 1 (alb) -->
+                        <rect x="30" y="16" width="45" height="18" rx="2" fill="rgba(240,230,140,0.15)" stroke="#f0e68c" stroke-width="0.6"/>
+                        <rect x="78" y="16" width="45" height="18" rx="2" fill="rgba(240,230,140,0.15)" stroke="#f0e68c" stroke-width="0.6"/>
+                        <rect x="126" y="16" width="45" height="18" rx="2" fill="rgba(240,230,140,0.15)" stroke="#f0e68c" stroke-width="0.6"/>
+                        <!-- Rând 2 (alb) -->
+                        <rect x="30" y="37" width="45" height="18" rx="2" fill="rgba(240,230,140,0.12)" stroke="#f0e68c" stroke-width="0.5"/>
+                        <rect x="78" y="37" width="45" height="18" rx="2" fill="rgba(240,230,140,0.12)" stroke="#f0e68c" stroke-width="0.5"/>
+                        <rect x="126" y="37" width="45" height="18" rx="2" fill="rgba(240,230,140,0.12)" stroke="#f0e68c" stroke-width="0.5"/>
+                        <!-- Rând 3 (alb) -->
+                        <rect x="30" y="58" width="45" height="18" rx="2" fill="rgba(240,230,140,0.12)" stroke="#f0e68c" stroke-width="0.5"/>
+                        <rect x="78" y="58" width="45" height="18" rx="2" fill="rgba(240,230,140,0.12)" stroke="#f0e68c" stroke-width="0.5"/>
+                        <rect x="126" y="58" width="45" height="18" rx="2" fill="rgba(240,230,140,0.12)" stroke="#f0e68c" stroke-width="0.5"/>
+                        <!-- Rând 4 (roșu) -->
+                        <rect x="30" y="79" width="45" height="18" rx="2" fill="rgba(139,32,48,0.15)" stroke="#c5737a" stroke-width="0.5"/>
+                        <rect x="78" y="79" width="45" height="18" rx="2" fill="rgba(139,32,48,0.15)" stroke="#c5737a" stroke-width="0.5"/>
+                        <rect x="126" y="79" width="45" height="18" rx="2" fill="rgba(139,32,48,0.15)" stroke="#c5737a" stroke-width="0.5"/>
+                        <!-- Rând 5 (roșu) -->
+                        <rect x="30" y="100" width="45" height="18" rx="2" fill="rgba(139,32,48,0.12)" stroke="#c5737a" stroke-width="0.5"/>
+                        <rect x="78" y="100" width="45" height="18" rx="2" fill="rgba(139,32,48,0.12)" stroke="#c5737a" stroke-width="0.5"/>
+                        <rect x="126" y="100" width="45" height="18" rx="2" fill="rgba(139,32,48,0.12)" stroke="#c5737a" stroke-width="0.5"/>
+                    </g>
+                    <!-- Linii rafturi -->
+                    <line x1="25" y1="36" x2="175" y2="36" stroke="#5a5775" stroke-width="0.4" stroke-dasharray="3 2"/>
+                    <line x1="25" y1="57" x2="175" y2="57" stroke="#5a5775" stroke-width="0.4" stroke-dasharray="3 2"/>
+                    <line x1="25" y1="78" x2="175" y2="78" stroke="#5a5775" stroke-width="0.4" stroke-dasharray="3 2"/>
+                    <line x1="25" y1="99" x2="175" y2="99" stroke="#5a5775" stroke-width="0.4" stroke-dasharray="3 2"/>
+                    <!-- Conectori cam-lock -->
+                    <circle cx="52" cy="25" r="2" fill="#c9a84c" opacity="0.7"/>
+                    <circle cx="100" cy="25" r="2" fill="#c9a84c" opacity="0.7"/>
+                    <circle cx="148" cy="25" r="2" fill="#c9a84c" opacity="0.7"/>
+                    <!-- Etichete -->
+                    <text x="100" y="138" fill="#8a87a0" font-size="7" text-anchor="middle">5×3 = 15 BIB (375L)</text>
+                </svg>
+            </div>
+            <h3>Stocare &amp; Conectare</h3>
+            <p>15 Bag-in-Box pe rafturi glisante (5 rânduri × 3 coloane) cu conectori cam-lock alimentari.</p>
+            <ul class="specs-list">
+                <li><span>Capacitate</span><span>15× BIB 25L</span></li>
+                <li><span>Total lichid</span><span>375 litri</span></li>
+                <li><span>Sortimente</span><span>2 (Alb + Roșu)</span></li>
+                <li><span>Conectori</span><span>Cam-lock 1/2" alimentar</span></li>
+                <li><span>Rafturi</span><span>Șine ≥100kg/raft (sarcină reală ~80kg)</span></li>
+            </ul>
+        </div>
+
+        <!-- Dozare -->
+        <div class="subsystem-card">
+            <div class="card-sketch">
+                <svg viewBox="0 0 200 140" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Sertar cadru -->
+                    <rect x="20" y="10" width="160" height="105" rx="3" fill="#2a2a3a" stroke="#5a5a6a" stroke-width="1.5"/>
+                    <!-- Perete spate -->
+                    <rect x="25" y="15" width="150" height="70" rx="2" fill="#3a3a4a" stroke="#4a4a5a" stroke-width="0.8"/>
+                    <!-- Dozator Alb -->
+                    <rect x="50" y="22" width="22" height="48" rx="3" fill="#aaaabb" stroke="#bbbccc" stroke-width="0.8"/>
+                    <rect x="52" y="20" width="18" height="5" rx="2" fill="#999aab"/>
+                    <circle cx="61" cy="19" r="6" fill="none" stroke="#f0e68c" stroke-width="1.5"/>
+                    <rect x="58" y="70" width="6" height="16" rx="1.5" fill="#999aab"/>
+                    <ellipse cx="61" cy="90" rx="3" ry="3.5" fill="rgba(240,230,140,0.3)" stroke="#f0e68c" stroke-width="0.4"/>
+                    <text x="61" y="100" fill="#f0e68c" font-size="6" text-anchor="middle">ALB</text>
+                    <!-- Dozator Roșu -->
+                    <rect x="120" y="22" width="22" height="48" rx="3" fill="#aaaabb" stroke="#bbbccc" stroke-width="0.8"/>
+                    <rect x="122" y="20" width="18" height="5" rx="2" fill="#999aab"/>
+                    <circle cx="131" cy="19" r="6" fill="none" stroke="#c5737a" stroke-width="1.5"/>
+                    <rect x="128" y="70" width="6" height="16" rx="1.5" fill="#999aab"/>
+                    <ellipse cx="131" cy="90" rx="3" ry="3.5" fill="rgba(139,32,48,0.3)" stroke="#c5737a" stroke-width="0.4"/>
+                    <text x="131" y="100" fill="#c5737a" font-size="6" text-anchor="middle">ROȘU</text>
+                    <!-- Grilă scurgere -->
+                    <line x1="35" y1="88" x2="165" y2="88" stroke="#888899" stroke-width="0.8"/>
+                    <line x1="35" y1="91" x2="165" y2="91" stroke="#888899" stroke-width="0.8"/>
+                    <line x1="35" y1="94" x2="165" y2="94" stroke="#888899" stroke-width="0.8"/>
+                    <line x1="35" y1="97" x2="165" y2="97" stroke="#888899" stroke-width="0.8"/>
+                    <!-- Tavă colectare -->
+                    <rect x="30" y="102" width="140" height="10" rx="2" fill="#334455" stroke="#445566" stroke-width="0.6"/>
+                    <text x="100" y="110" fill="#8a87a0" font-size="5" text-anchor="middle">TAVĂ COLECTARE</text>
+                    <!-- Cote -->
+                    <text x="100" y="134" fill="#c9a84c" font-size="6" text-anchor="middle">350 × 450 mm</text>
+                </svg>
+            </div>
+            <h3>Dozare / Dispensare</h3>
+            <p>2 dozatoare cilindrici AISI 316L (Alb + Roșu) cu tavă de colectare și grilă de scurgere.</p>
+            <ul class="specs-list">
+                <li><span>Dozatoare</span><span>2× cilindrici AISI 316L</span></li>
+                <li><span>Pompe</span><span>2× peristaltice (1/canal — fără amestec)</span></li>
+                <li><span>Precizie</span><span>±1% volum</span></li>
+                <li><span>Opțiuni dozare</span><span>0.5L / 1L / 2L (combinabile)</span></li>
+                <li><span>Sertar</span><span>5 piese + tavă colectare + grilă</span></li>
+            </ul>
+        </div>
+
+        <!-- Răcire -->
+        <div class="subsystem-card">
+            <div class="card-sketch">
+                <svg viewBox="0 0 200 140" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Compresor (dublu cerc) -->
+                    <circle cx="60" cy="55" r="30" fill="none" stroke="#334455" stroke-width="2"/>
+                    <circle cx="60" cy="55" r="18" fill="none" stroke="#222233" stroke-width="1.5"/>
+                    <text x="60" y="52" fill="#8a87a0" font-size="7" text-anchor="middle">Compresor</text>
+                    <text x="60" y="62" fill="#8a87a0" font-size="6" text-anchor="middle">R600a</text>
+                    <!-- Conexiuni circuit -->
+                    <path d="M90,45 Q110,30 130,35" fill="none" stroke="#3498db" stroke-width="1.2" stroke-dasharray="3 2"/>
+                    <path d="M90,65 Q110,80 130,75" fill="none" stroke="#e74c3c" stroke-width="1.2" stroke-dasharray="3 2"/>
+                    <!-- Vaporizator -->
+                    <rect x="130" y="25" width="50" height="20" rx="3" fill="none" stroke="#3498db" stroke-width="1"/>
+                    <path d="M135,35 L140,30 L145,40 L150,30 L155,40 L160,30 L165,40 L170,30 L175,35" fill="none" stroke="#3498db" stroke-width="0.8"/>
+                    <text x="155" y="52" fill="#3498db" font-size="5" text-anchor="middle">Vaporizator</text>
+                    <!-- Condensator -->
+                    <rect x="130" y="65" width="50" height="20" rx="3" fill="none" stroke="#e74c3c" stroke-width="1"/>
+                    <path d="M135,75 L140,70 L145,80 L150,70 L155,80 L160,70 L165,80 L170,70 L175,75" fill="none" stroke="#e74c3c" stroke-width="0.8"/>
+                    <text x="155" y="92" fill="#e74c3c" font-size="5" text-anchor="middle">Condensator</text>
+                    <!-- Izolație -->
+                    <rect x="20" y="95" width="160" height="18" rx="2" fill="rgba(204,187,102,0.15)" stroke="#ccbb66" stroke-width="0.8"/>
+                    <text x="100" y="107" fill="#ccbb66" font-size="6" text-anchor="middle">IZOLAȚIE PU 40mm</text>
+                    <!-- Temperatură -->
+                    <circle cx="155" y="120" r="4" fill="#3498db"/>
+                    <text x="163" y="123" fill="#3498db" font-size="6">4-8°C</text>
+                    <!-- Flux -->
+                    <text x="100" y="132" fill="#c9a84c" font-size="5" text-anchor="middle">Circuit termodinamic R600a</text>
+                </svg>
+            </div>
+            <h3>Sistem Răcire</h3>
+            <p>Compresion cu R600a ecologic, vaporizator mărit pentru uniformitate termică.</p>
+            <ul class="specs-list">
+                <li><span>Refrigerant</span><span>R600a (izobutan)</span></li>
+                <li><span>Temperatură</span><span>4-8°C zonă unică</span></li>
+                <li><span>Compresor</span><span>Hermetic 250-350W</span></li>
+                <li><span>Izolație</span><span>PU 40mm, 40 kg/m³</span></li>
+            </ul>
+        </div>
+
+        <!-- Telecomanda -->
+        <div class="subsystem-card">
+            <div class="card-sketch">
+                <svg viewBox="0 0 200 140" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Corp telecomandă -->
+                    <rect x="60" y="8" width="80" height="125" rx="12" fill="#2a2a3a" stroke="#5a5775" stroke-width="1.5"/>
+                    <rect x="65" y="13" width="70" height="115" rx="10" fill="#333344" stroke="#4a4a5a" stroke-width="0.5"/>
+                    <!-- LED status -->
+                    <circle cx="100" cy="24" r="3" fill="#22aa44" opacity="0.8"/>
+                    <!-- Butoane canal (4) -->
+                    <rect x="74" y="35" width="24" height="14" rx="3" fill="rgba(240,230,140,0.2)" stroke="#f0e68c" stroke-width="1"/>
+                    <text x="86" y="45" fill="#f0e68c" font-size="6" text-anchor="middle">CH 1</text>
+                    <rect x="102" y="35" width="24" height="14" rx="3" fill="rgba(255,182,193,0.2)" stroke="#ffb6c1" stroke-width="1"/>
+                    <text x="114" y="45" fill="#ffb6c1" font-size="6" text-anchor="middle">CH 2</text>
+                    <rect x="74" y="53" width="24" height="14" rx="3" fill="rgba(197,115,122,0.2)" stroke="#c5737a" stroke-width="1"/>
+                    <text x="86" y="63" fill="#c5737a" font-size="6" text-anchor="middle">CH 3</text>
+                    <rect x="102" y="53" width="24" height="14" rx="3" fill="rgba(139,32,48,0.2)" stroke="#8b2030" stroke-width="1"/>
+                    <text x="114" y="63" fill="#8b2030" font-size="6" text-anchor="middle">CH 4</text>
+                    <!-- Separator -->
+                    <line x1="75" y1="73" x2="125" y2="73" stroke="#5a5775" stroke-width="0.5"/>
+                    <!-- Butoane volum -->
+                    <rect x="74" y="78" width="16" height="14" rx="3" fill="rgba(201,168,76,0.15)" stroke="#c9a84c" stroke-width="1"/>
+                    <text x="82" y="88" fill="#c9a84c" font-size="7" text-anchor="middle">0.5</text>
+                    <rect x="93" y="78" width="14" height="14" rx="3" fill="rgba(201,168,76,0.15)" stroke="#c9a84c" stroke-width="1"/>
+                    <text x="100" y="88" fill="#c9a84c" font-size="7" text-anchor="middle">1L</text>
+                    <rect x="110" y="78" width="16" height="14" rx="3" fill="rgba(201,168,76,0.15)" stroke="#c9a84c" stroke-width="1"/>
+                    <text x="118" y="88" fill="#c9a84c" font-size="7" text-anchor="middle">2L</text>
+                    <!-- Buton START -->
+                    <circle cx="100" cy="108" r="10" fill="rgba(34,170,68,0.15)" stroke="#22aa44" stroke-width="1.5"/>
+                    <text x="100" y="111" fill="#22aa44" font-size="6" text-anchor="middle">GO</text>
+                    <!-- Undă RF -->
+                    <path d="M42,25 Q50,15 58,25" fill="none" stroke="#c9a84c" stroke-width="0.6" opacity="0.6"/>
+                    <path d="M38,25 Q50,10 62,25" fill="none" stroke="#c9a84c" stroke-width="0.5" opacity="0.4"/>
+                    <text x="50" y="35" fill="#c9a84c" font-size="5" text-anchor="middle">433MHz</text>
+                </svg>
+            </div>
+            <h3>Telecomandă &amp; Status</h3>
+            <p>Telecomandă RF 433MHz cu butoane dedicate pentru canal și volum.</p>
+            <ul class="specs-list">
+                <li><span>Protocol</span><span>RF 433MHz (ASK/OOK)</span></li>
+                <li><span>Butoane canal</span><span>4 (1 per sortiment)</span></li>
+                <li><span>Butoane volum</span><span>0.5L + 1L + 2L aditive</span></li>
+                <li><span>Rază acțiune</span><span>~15m interior</span></li>
+            </ul>
+        </div>
+
+        <!-- Electronică -->
+        <div class="subsystem-card">
+            <div class="card-sketch">
+                <svg viewBox="0 0 200 140" xmlns="http://www.w3.org/2000/svg">
+                    <!-- PCB principal -->
+                    <rect x="25" y="20" width="150" height="85" rx="3" fill="#1a4a2a" stroke="#22aa44" stroke-width="1.5"/>
+                    <!-- Piste PCB -->
+                    <line x1="35" y1="30" x2="165" y2="30" stroke="#0a6a1a" stroke-width="0.5"/>
+                    <line x1="35" y1="45" x2="165" y2="45" stroke="#0a6a1a" stroke-width="0.5"/>
+                    <line x1="35" y1="60" x2="165" y2="60" stroke="#0a6a1a" stroke-width="0.5"/>
+                    <line x1="35" y1="75" x2="165" y2="75" stroke="#0a6a1a" stroke-width="0.5"/>
+                    <line x1="35" y1="90" x2="165" y2="90" stroke="#0a6a1a" stroke-width="0.5"/>
+                    <!-- ESP32 chip -->
+                    <rect x="40" y="35" width="40" height="30" rx="2" fill="#222233" stroke="#555566" stroke-width="0.8"/>
+                    <text x="60" y="50" fill="#22aa44" font-size="6" text-anchor="middle">ESP32</text>
+                    <text x="60" y="59" fill="#22aa44" font-size="4" text-anchor="middle">WROOM-32</text>
+                    <!-- Pini ESP32 -->
+                    <g opacity="0.7">
+                        <rect x="37" y="38" width="2" height="3" fill="#c9a84c"/>
+                        <rect x="37" y="44" width="2" height="3" fill="#c9a84c"/>
+                        <rect x="37" y="50" width="2" height="3" fill="#c9a84c"/>
+                        <rect x="37" y="56" width="2" height="3" fill="#c9a84c"/>
+                        <rect x="81" y="38" width="2" height="3" fill="#c9a84c"/>
+                        <rect x="81" y="44" width="2" height="3" fill="#c9a84c"/>
+                        <rect x="81" y="50" width="2" height="3" fill="#c9a84c"/>
+                        <rect x="81" y="56" width="2" height="3" fill="#c9a84c"/>
+                    </g>
+                    <!-- LCD connector -->
+                    <rect x="95" y="35" width="35" height="15" rx="2" fill="#0a1a0a" stroke="#22aa44" stroke-width="0.6"/>
+                    <text x="113" y="44" fill="#22aa44" font-size="5" text-anchor="middle">LCD I2C</text>
+                    <!-- RF module -->
+                    <rect x="95" y="55" width="25" height="15" rx="2" fill="#223322" stroke="#5a5775" stroke-width="0.6"/>
+                    <text x="108" y="64" fill="#8a87a0" font-size="5" text-anchor="middle">RF RX</text>
+                    <!-- Driver pompe -->
+                    <rect x="135" y="35" width="28" height="30" rx="2" fill="#332233" stroke="#665577" stroke-width="0.6"/>
+                    <text x="149" y="50" fill="#8a87a0" font-size="4.5" text-anchor="middle">DRIVER</text>
+                    <text x="149" y="58" fill="#8a87a0" font-size="4" text-anchor="middle">POMPE</text>
+                    <!-- PSU -->
+                    <rect x="125" y="72" width="42" height="22" rx="2" fill="#334455" stroke="#445566" stroke-width="0.8"/>
+                    <text x="146" y="84" fill="#8a87a0" font-size="5" text-anchor="middle">PSU 24V</text>
+                    <text x="146" y="91" fill="#8a87a0" font-size="4" text-anchor="middle">Mean Well</text>
+                    <!-- Relee -->
+                    <rect x="40" y="72" width="15" height="22" rx="1" fill="#443322" stroke="#665544" stroke-width="0.5"/>
+                    <text x="48" y="86" fill="#8a87a0" font-size="4" text-anchor="middle">REL</text>
+                    <rect x="60" y="72" width="15" height="22" rx="1" fill="#443322" stroke="#665544" stroke-width="0.5"/>
+                    <text x="68" y="86" fill="#8a87a0" font-size="4" text-anchor="middle">REL</text>
+                    <!-- Antena WiFi -->
+                    <line x1="55" y1="20" x2="55" y2="12" stroke="#c9a84c" stroke-width="0.8"/>
+                    <path d="M48,14 Q55,8 62,14" fill="none" stroke="#c9a84c" stroke-width="0.6"/>
+                    <path d="M44,16 Q55,6 66,16" fill="none" stroke="#c9a84c" stroke-width="0.4"/>
+                    <!-- Etichete -->
+                    <text x="100" y="120" fill="#c9a84c" font-size="5.5" text-anchor="middle">WiFi + BLE + RF + I2C + PWM</text>
+                    <text x="100" y="132" fill="#8a87a0" font-size="5" text-anchor="middle">Telemetrie MQTT Cloud</text>
+                </svg>
+            </div>
+            <h3>Electronică &amp; Control</h3>
+            <p>ESP32 DevKit cu WiFi + BLE pentru telemetrie cloud MQTT.</p>
+            <ul class="specs-list">
+                <li><span>MCU</span><span>ESP32-WROOM-32</span></li>
+                <li><span>Display</span><span>LCD 20×4 I2C</span></li>
+                <li><span>Pompă</span><span>1× Peristaltică BLDC 24V</span></li>
+                <li><span>Alimentare</span><span>Mean Well 240W 24V DIN</span></li>
+            </ul>
+        </div>
+
+        <!-- Igienă -->
+        <div class="subsystem-card">
+            <div class="card-sketch">
+                <svg viewBox="0 0 200 140" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Rezervor CIP -->
+                    <rect x="20" y="15" width="55" height="70" rx="4" fill="none" stroke="#3498db" stroke-width="1.5"/>
+                    <rect x="25" y="20" width="45" height="60" rx="3" fill="rgba(52,152,219,0.08)"/>
+                    <!-- Nivel lichid CIP -->
+                    <rect x="25" y="45" width="45" height="35" rx="3" fill="rgba(52,152,219,0.15)"/>
+                    <text x="48" y="55" fill="#3498db" font-size="6" text-anchor="middle">CIP</text>
+                    <text x="48" y="65" fill="#3498db" font-size="7" text-anchor="middle" font-weight="600">5L</text>
+                    <!-- Rezervor apă -->
+                    <rect x="90" y="15" width="55" height="70" rx="4" fill="none" stroke="#2ecc71" stroke-width="1.5"/>
+                    <rect x="95" y="20" width="45" height="60" rx="3" fill="rgba(46,204,113,0.08)"/>
+                    <!-- Nivel lichid apă -->
+                    <rect x="95" y="35" width="45" height="45" rx="3" fill="rgba(46,204,113,0.12)"/>
+                    <text x="118" y="50" fill="#2ecc71" font-size="6" text-anchor="middle">APĂ</text>
+                    <text x="118" y="62" fill="#2ecc71" font-size="7" text-anchor="middle" font-weight="600">10L</text>
+                    <!-- Pompă CIP -->
+                    <circle cx="160" cy="50" r="14" fill="none" stroke="#334455" stroke-width="1.5"/>
+                    <text x="160" y="50" fill="#8a87a0" font-size="5" text-anchor="middle">P</text>
+                    <text x="160" y="57" fill="#8a87a0" font-size="4" text-anchor="middle">CIP</text>
+                    <!-- Conexiuni tubi -->
+                    <line x1="75" y1="50" x2="90" y2="50" stroke="#3498db" stroke-width="1" stroke-dasharray="2 2"/>
+                    <line x1="145" y1="50" x2="146" y2="50" stroke="#3498db" stroke-width="1" stroke-dasharray="2 2"/>
+                    <!-- Flux spre dozatoare -->
+                    <path d="M160,64 L160,95 L100,95" fill="none" stroke="#3498db" stroke-width="0.8" stroke-dasharray="3 2"/>
+                    <!-- Dozatoare (simplificate) -->
+                    <rect x="60" y="90" width="12" height="20" rx="2" fill="#aaaabb" stroke="#bbbccc" stroke-width="0.5"/>
+                    <rect x="80" y="90" width="12" height="20" rx="2" fill="#aaaabb" stroke="#bbbccc" stroke-width="0.5"/>
+                    <text x="66" y="115" fill="#f0e68c" font-size="4" text-anchor="middle">ALB</text>
+                    <text x="86" y="115" fill="#c5737a" font-size="4" text-anchor="middle">ROȘU</text>
+                    <!-- HACCP badge -->
+                    <rect x="130" y="95" width="50" height="16" rx="3" fill="rgba(46,204,113,0.1)" stroke="#2ecc71" stroke-width="0.8"/>
+                    <text x="155" y="105" fill="#2ecc71" font-size="6" text-anchor="middle" font-weight="600">HACCP ✓</text>
+                    <!-- Etichetă -->
+                    <text x="100" y="132" fill="#c9a84c" font-size="5" text-anchor="middle">Ciclu: CIP → Clătire H₂O → Vin</text>
+                </svg>
+            </div>
+            <h3>Igienă CIP</h3>
+            <p>Sistem de spălare automată cu soluție CIP și apă curată.</p>
+            <ul class="specs-list">
+                <li><span>Rezervor CIP</span><span>5L AISI 316L</span></li>
+                <li><span>Rezervor apă</span><span>10L apă curată</span></li>
+                <li><span>Frecvență</span><span>La schimbare BIB</span></li>
+                <li><span>Conformitate</span><span>HACCP</span></li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- ============================
+     FLUX OPERARE
+     ============================ -->
+<section id="flow" class="section">
+    <div class="section-header">
+        <h2>Flux de Operare</h2>
+        <div class="section-divider"></div>
+        <p>Parcursul de la comanda operatorului la dozare</p>
+    </div>
+
+    <div class="flow-timeline">
+        <div class="flow-step">
+            <div class="step-dot"></div>
+            <div class="step-content">
+                <div class="step-icon">👤</div>
+                <h4>1. Client → Operator</h4>
+                <p>Clientul solicită vinul dorit. Operatorul verifică vârsta și încasează plata.</p>
+            </div>
+        </div>
+        <div class="flow-step">
+            <div class="step-dot"></div>
+            <div class="step-content">
+                <div class="step-icon">📡</div>
+                <h4>2. Selectare Canal (Telecomandă)</h4>
+                <p>Operatorul apasă butonul corespunzător sortimentului (1-4) pe telecomanda RF.</p>
+            </div>
+        </div>
+        <div class="flow-step">
+            <div class="step-dot"></div>
+            <div class="step-content">
+                <div class="step-icon">🔢</div>
+                <h4>3. Selectare Volum (Telecomandă)</h4>
+                <p>Apasă butoanele de volum combinabil: 0.5L + 1L + 2L (ex: 0.5+1=1.5L).</p>
+            </div>
+        </div>
+        <div class="flow-step">
+            <div class="step-dot"></div>
+            <div class="step-content">
+                <div class="step-icon">🍷</div>
+                <h4>4. Plasare Recipient</h4>
+                <p>Senzor IR detectează prezența recipientului în nișă. Fără recipient → nu pornește.</p>
+            </div>
+        </div>
+        <div class="flow-step">
+            <div class="step-dot"></div>
+            <div class="step-content">
+                <div class="step-icon">⚙️</div>
+                <h4>5. Dozare Automată</h4>
+                <p>Pompa peristaltică dozează volumul exact (±1%). LCD afișează progresul în timp real.</p>
+            </div>
+        </div>
+        <div class="flow-step">
+            <div class="step-dot"></div>
+            <div class="step-content">
+                <div class="step-icon">✅</div>
+                <h4>6. Finalizare</h4>
+                <p>Beep confirmare, LCD afișează "GATA", aparat revine la standby. Date raportate via MQTT cloud.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================
+     BOM (Bill of Materials)
+     ============================ -->
+<section id="bom" class="section">
+    <div class="section-header">
+        <h2>Bill of Materials</h2>
+        <div class="section-divider"></div>
+        <p>Lista estimativă de componente și costuri</p>
+    </div>
+
+    <div class="table-responsive">
+        <table class="bom-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Componentă</th>
+                    <th>Specificație</th>
+                    <th>Cantitate</th>
+                    <th>Preț Est. (€)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>1</td><td>Cabinet AISI 304</td><td>1800×900×750mm, 1.5mm grosime</td><td>1</td><td>450</td></tr>
+                <tr><td>2</td><td>Izolație PU</td><td>Poliuretan expandat 40mm, 40kg/m³</td><td>1 set</td><td>120</td></tr>
+                <tr><td>3</td><td>Compresor R600a</td><td>Hermetic, 250-350W, LBP</td><td>1</td><td>180</td></tr>
+                <tr><td>4</td><td>Vaporizator + Condensator</td><td>Cupru/Al, dimensionat R600a</td><td>1 set</td><td>95</td></tr>
+                <tr><td>5</td><td>Pompă peristaltică BLDC</td><td>24V, 30W, encoder, FDA silicone — <strong>1 per canal, fără amestec Alb/Roșu</strong></td><td>2</td><td>160</td></tr>
+                <tr><td>6</td><td>Dozatoare cilindrici</td><td>AISI 316L, DN8 + tavă colectare</td><td>2</td><td>90</td></tr>
+                <tr><td>7</td><td>ESP32 DevKit</td><td>ESP32-WROOM-32, WiFi+BLE</td><td>1</td><td>8</td></tr>
+                <tr><td>8</td><td>Modul RF 433MHz</td><td>Receptor ASK/OOK + Telecomandă</td><td>1 set</td><td>12</td></tr>
+                <tr><td>9</td><td>LCD 20×4 I2C</td><td>Display caractere, backlight verde</td><td>1</td><td>7</td></tr>
+                <tr><td>10</td><td>Sursă alimentare</td><td>Mean Well NDR-240-24, DIN rail</td><td>1</td><td>55</td></tr>
+                <tr><td>11</td><td>Senzor IR</td><td>Detector prezență recipient în nișă</td><td>1</td><td>3</td></tr>
+                <tr><td>12</td><td>Conectori Cam-Lock</td><td>1/2" alimentar, AISI 316L</td><td>15</td><td>75</td></tr>
+                <tr><td>13</td><td>Tub siliconic FDA</td><td>ID 8mm, perete 2mm, rulou 20m — <strong>consumabil, se înlocuiește periodic</strong></td><td>20m</td><td>35</td></tr>
+                <tr><td>14</td><td>Rafturi glisante</td><td>Șine telescopice, <strong>≥100kg/raft</strong> (3×BIB 25L ≈ 78-81kg/raft real)</td><td>5</td><td>90</td></tr>
+                <tr><td>15</td><td>Rezervor CIP + apă</td><td>AISI 316L, 5L + 10L</td><td>2</td><td>45</td></tr>
+                <tr><td>16</td><td>PCB custom + cablaj</td><td>Driver pompe, relee, senzori</td><td>1</td><td>60</td></tr>
+                <tr><td>17</td><td>Montaj + Asamblare</td><td>Manoperă, testare, calibrare</td><td>1</td><td>250</td></tr>
+            </tbody>
+        </table>
+        <div class="bom-total">TOTAL ESTIMAT: ~1.735 € <span style="font-size:0.6em;color:var(--muted);font-weight:400;">(corectat — vezi nota v2.1 mai jos)</span></div>
+        <div style="margin-top:14px;padding:14px 18px;border:1px solid rgba(201,168,76,0.3);border-radius:10px;background:rgba(201,168,76,0.05);font-size:0.82rem;color:var(--muted);line-height:1.7;">
+            <strong style="color:var(--gold);">Notă corecții v2.1 (audit tehnic):</strong>
+            (1) suma inițială afișată (~1.660€) nu corespundea aritmetic liniilor din tabel (real: 1.615€) — corectată acum la 1.735€ după includerea celor 2 corecții de mai jos;
+            (2) pompă peristaltică dublată (2 buc, câte una per canal Alb/Roșu) — o singură pompă pentru 2 vinuri diferite ar amesteca lichidele între dozări;
+            (3) rating rafturi glisante ridicat la ≥100kg/raft — sarcina reală per raft (3×BIB 25L) este ~78-81kg, peste vechea specificație de 40kg;
+            (4) tub siliconic marcat explicit ca și consumabil (degradare sub alcool/aciditate), nu doar cost unic;
+            (5) recomandăm validare separată din partea unui inginer de frigotehnie pentru: debitul de ventilație al zonei tehnice față de puterea disipată a compresorului (350W) și încărcătura de agent R600a (A3, inflamabil) față de volumul cabinetului conform EN 60335-2-89 — nu sunt aspecte care se pot valida doar din desen.
+        </div>
+    </div>
+
+    <!-- KPI Operationale -->
+    <div style="margin-top: 60px;">
+        <div class="section-header">
+            <h2>KPI Operaționali</h2>
+            <div class="section-divider"></div>
+            <p>Indicatori de performanță</p>
+        </div>
+        <div class="info-grid">
+            <div class="info-chip">
+                <div class="chip-value">±1%</div>
+                <div class="chip-label">Precizie dozare</div>
+            </div>
+            <div class="info-chip">
+                <div class="chip-value">4-8°C</div>
+                <div class="chip-label">Temperatură servire</div>
+            </div>
+            <div class="info-chip">
+                <div class="chip-value">~15s</div>
+                <div class="chip-label">Timp dozare / 1L</div>
+            </div>
+            <div class="info-chip">
+                <div class="chip-value">375L</div>
+                <div class="chip-label">Autonomie maximă</div>
+            </div>
+            <div class="info-chip">
+                <div class="chip-value">350W</div>
+                <div class="chip-label">Consum mediu</div>
+            </div>
+            <div class="info-chip">
+                <div class="chip-value">MQTT</div>
+                <div class="chip-label">Telemetrie cloud</div>
+            </div>
+            <div class="info-chip">
+                <div class="chip-value">~600 kg</div>
+                <div class="chip-label">Greutate încărcată (max, 375L + cabinet)</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Conformitate -->
+    <div style="margin-top: 60px;">
+        <div class="section-header">
+            <h2>Conformitate & Standarde</h2>
+            <div class="section-divider"></div>
+            <p>Reglementări aplicabile</p>
+        </div>
+        <ul class="standards-list">
+            <li>Regulamentul (CE) 852/2004 — Igiena produselor alimentare (HACCP)</li>
+            <li>EN 13485 — Termometre pentru alimente</li>
+            <li>Directiva LVD 2014/35/UE — Siguranță echipamente electrice</li>
+            <li>Directiva EMC 2014/30/UE — Compatibilitate electromagnetică</li>
+            <li>Regulamentul (UE) 517/2014 — Gaze fluorurate cu efect de seră (R600a exempt)</li>
+            <li>EN 60335-2-89 — Aparate de răcire comerciale</li>
+        </ul>
+    </div>
+</section>
+
+<!-- ============================
+     LIGHTBOX OVERLAY
+     ============================ -->
+<div class="lightbox-overlay" id="lightbox">
+    <button class="lightbox-close" id="lightboxClose">✕</button>
+    <div class="lightbox-content" id="lightboxContent"></div>
+</div>
+
+<!-- ============================
+     FLOATING PRINT BUTTON
+     ============================ -->
+<button class="btn-print" id="btnPrint">📄 Descarcă PDF</button>
+
+<!-- ============================
+     FOOTER
+     ============================ -->
+<footer class="footer">
+    <p>WineVend Pro v2.0 — Specificație Tehnică · Generat automat · &copy; 2026</p>
+</footer>
+
+<!-- JavaScript -->
+<script src="./spec-app.js"></script>
+</body>
+</html>

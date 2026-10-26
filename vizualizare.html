@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ro" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>WineVend Pro v2.0 — Vizualizare 3D</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Local Styles -->
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <div id="loader" class="loader">
+        <div class="spinner"></div>
+        <p style="color: var(--secondary-color); font-weight: 600;">Se încarcă vizualizarea 3D...</p>
+    </div>
+
+    <canvas id="canvas3d"></canvas>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="brand">
+            <span class="brand-icon">🍷</span>
+            <div>
+                <span class="brand-name">WineVend Pro</span>
+                <span class="brand-sub">Vizualizator Interactiv</span>
+            </div>
+        </div>
+        <div class="top-actions">
+            <!-- Page navigation -->
+            <a href="./index.html" class="icon-btn" title="Acasă" aria-label="Acasă" style="text-decoration:none;">🏠</a>
+            <a href="./specificatie.html" class="icon-btn" title="Specificații" aria-label="Specificații tehnice" style="text-decoration:none;">📋</a>
+            <a href="./productie.html" class="icon-btn" title="Producție" aria-label="Desene de producție" style="text-decoration:none;">✂️</a>
+            <!-- Dark mode toggle -->
+            <button class="icon-btn" id="btnTheme" title="Schimbă tema" aria-label="Schimbă tema deschis/întunecat">🌙</button>
+            <!-- Mobile menu toggle -->
+            <button class="icon-btn mobile-menu-btn" id="btnMenu" title="Meniu" aria-label="Deschide meniul de control">☰</button>
+        </div>
+    </div>
+
+    <!-- Controls (Sidebar) -->
+    <div class="controls" id="controlsPanel">
+        <div class="ctrl-title">Vizualizare</div>
+
+        <div class="ctrl-group">
+            <span class="ctrl-label">Vedere predefinita</span>
+            <div class="ctrl-btns" id="viewBtns">
+                <button class="ctrl-btn active" data-view="front">Fata</button>
+                <button class="ctrl-btn" data-view="back">Spate</button>
+                <button class="ctrl-btn" data-view="side">Lateral</button>
+                <button class="ctrl-btn" data-view="top">Sus</button>
+                <button class="ctrl-btn" data-view="iso">Isometric</button>
+            </div>
+        </div>
+
+        <div class="ctrl-group">
+            <span class="ctrl-label">Componente vizibile</span>
+            <div class="ctrl-toggle"><input type="checkbox" id="togCabinet" checked><label for="togCabinet">Cabinet exterior</label></div>
+            <div class="ctrl-toggle"><input type="checkbox" id="togDoor" checked><label for="togDoor">Usa service</label></div>
+            <div class="ctrl-toggle"><input type="checkbox" id="togScreen" checked><label for="togScreen">LCD + ESP32</label></div>
+            <div class="ctrl-toggle"><input type="checkbox" id="togNozzles" checked><label for="togNozzles">Sertar dozare</label></div>
+            <div class="ctrl-toggle"><input type="checkbox" id="togBIB" checked><label for="togBIB">Bag-in-Box</label></div>
+            <div class="ctrl-toggle"><input type="checkbox" id="togPumps" checked><label for="togPumps">Pompe + tehnic</label></div>
+            <div class="ctrl-toggle"><input type="checkbox" id="togInsulation" checked><label for="togInsulation">Izolatie</label></div>
+        </div>
+
+        <div class="ctrl-group">
+            <span class="ctrl-label">Mod vizualizare</span>
+            <div class="ctrl-btns" id="modeBtns">
+                <button class="ctrl-btn active" data-mode="solid">Solid</button>
+                <button class="ctrl-btn" data-mode="wireframe">Wireframe</button>
+                <button class="ctrl-btn" data-mode="xray">X-Ray</button>
+            </div>
+        </div>
+
+        <div class="ctrl-group">
+            <div class="ctrl-toggle"><input type="checkbox" id="togRotate"><label for="togRotate">Rotire automata</label></div>
+            <div class="ctrl-toggle"><input type="checkbox" id="togExplode"><label for="togExplode">Vedere explodata</label></div>
+        </div>
+
+        <div class="ctrl-group">
+            <span class="ctrl-label">🔍 Detaliu componentă</span>
+            <div class="ctrl-btns ctrl-btns-detail" id="detailBtns">
+                <button class="ctrl-btn detail-btn" data-part="cabinet">Cabinet</button>
+                <button class="ctrl-btn detail-btn" data-part="door">Ușă service</button>
+                <button class="ctrl-btn detail-btn" data-part="screen">LCD + ESP32</button>
+                <button class="ctrl-btn detail-btn" data-part="nozzles">Sertar dozare</button>
+                <button class="ctrl-btn detail-btn" data-part="bib">Bag-in-Box</button>
+                <button class="ctrl-btn detail-btn" data-part="pumps">Pompe + tehnic</button>
+                <button class="ctrl-btn detail-btn" data-part="insulation">Izolație</button>
+            </div>
+            <button class="export-btn export-btn-gold" id="btnResetDetail" style="margin-top:8px;display:none;">⬅ Înapoi la asamblaj</button>
+        </div>
+
+        <div class="export-group">
+            <button class="export-btn export-btn-green" id="btnExportPNG">📷 Descarcă Vederea Curentă</button>
+            <button class="export-btn export-btn-gold" id="btnExportPlans">📸 Planșe Tehnice</button>
+            <button class="export-btn export-btn-blue" id="btnExportGLTF">🧊 Descarcă Model 3D (GLTF)</button>
+            <span class="export-hint">Exportă modelul scenei curente.</span>
+        </div>
+    </div>
+
+    <!-- Info Panel (Tabs style) -->
+    <div class="info-panel" id="desktopInfoPanel">
+        <div class="tabs-header">
+            <button class="tab-btn active" data-target="tab1">Cabinet</button>
+            <button class="tab-btn" data-target="tab2">Sistem</button>
+            <button class="tab-btn" data-target="tab3">Comandă</button>
+        </div>
+        
+        <div id="tab1" class="tab-content active">
+            <div class="info-row"><span>Gabarit</span><span>1800 x 900 x 750 mm</span></div>
+            <div class="info-row"><span>Materiale</span><span>Inox AISI 304, 1.5mm</span></div>
+            <div class="info-row"><span>Izolatie</span><span>PU 40mm densitate înaltă</span></div>
+            <div class="info-row"><span>Greutate (gol)</span><span>~210 kg</span></div>
+            <div class="info-row"><span>Acces service</span><span>Ușă decupată cu zăvor</span></div>
+        </div>
+
+        <div id="tab2" class="tab-content">
+            <div class="info-row"><span>Capacitate</span><span>15 x 25L BIB = 375L</span></div>
+            <div class="info-row"><span>Canale dozare</span><span>2: Alb + Roșu</span></div>
+            <div class="info-row"><span>Pompe</span><span>2x Peristaltice BLDC 24V (1/canal)</span></div>
+            <div class="info-row"><span>Rafturi</span><span>≥100kg/raft (sarcină reală ~80kg)</span></div>
+            <div class="info-row"><span>Răcire</span><span>R600a, vaporizator mărit</span></div>
+            <div class="info-row"><span>Temp. de lucru</span><span>+4°C ... +8°C u.z.</span></div>
+            <div class="info-row"><span>Greutate încărcată</span><span>~600 kg (max)</span></div>
+        </div>
+
+        <div id="tab3" class="tab-content">
+            <div class="info-row"><span>Procesor logic</span><span>ESP32 Wi-Fi + BLE</span></div>
+            <div class="info-row"><span>Interfață om-mașină</span><span>LCD Character 20x4</span></div>
+            <div class="info-row"><span>Protocol activare</span><span>Receptor RF 433MHz</span></div>
+            <div class="info-row"><span>Telemetrie</span><span>MQTT către Cloud (apă/vin)</span></div>
+            <div class="info-row"><span>Sursă alimentare</span><span>Mean Well 240W 24V DIN</span></div>
+        </div>
+    </div>
+
+    <!-- Mobile Button -->
+    <button class="mobile-specs-trigger" id="btnMobileSpecs">ℹ️ Specificații Tehnice</button>
+
+    <!-- Mobile Modal -->
+    <div id="mobileSpecsOverlay">
+        <div class="mobile-modal" id="mobileModalContent">
+            <!-- Cloned content of info-panel injected here via JS -->
+            <div style="text-align:center; padding-top:20px;">
+                <button class="ctrl-btn" style="width:100%" id="btnCloseMobileSpecs">Închide</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tooltip -->
+    <div class="tooltip" id="tooltip">
+        <h4></h4>
+        <p></p>
+    </div>
+
+    <!-- Component Detail Card -->
+    <div class="component-card" id="componentCard">
+        <div class="component-card-header">
+            <span class="component-card-icon" id="compIcon"></span>
+            <h3 id="compTitle">Componentă</h3>
+        </div>
+        <div class="component-card-body" id="compBody">
+            <!-- Dynamic specs -->
+        </div>
+    </div>
+
+    <!-- Instructions -->
+    <div class="instructions">
+        <kbd>Click + Drag</kbd> Rotire<br>
+        <kbd>Scroll</kbd> Zoom<br>
+        <kbd>Right Click + Drag</kbd> Pan<br>
+        <kbd>Hover / Tap</kbd> Detalii
+    </div>
+
+    <!-- Scripts -->
+    <!-- FIX v2.1: three.js/OrbitControls/GLTFExporter erau incarcate direct de pe
+         CDN-uri externe (cdnjs + jsdelivr), fara fallback — daca reteaua sau CDN-ul
+         picau, pagina ramanea complet alba, fara niciun mesaj util pentru vizitator.
+         Le gazduim acum local, in vendor/three/, ca site-ul de documentatie sa
+         functioneze si offline / fara acces la internet. -->
+    <script src="./vendor/three/three.min.js"></script>
+    <script src="./vendor/three/OrbitControls.js"></script>
+    <script src="./vendor/three/GLTFExporter.js"></script>
+    <!-- Main Logic -->
+    <script src="./app.js"></script>
+</body>
+</html>
